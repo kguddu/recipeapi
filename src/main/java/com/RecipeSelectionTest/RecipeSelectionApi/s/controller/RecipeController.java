@@ -25,7 +25,7 @@ public class RecipeController {
         return recipeService.addRecipe(recipeRequest, bindingResult);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         return recipeService.getRecipe();
     }
