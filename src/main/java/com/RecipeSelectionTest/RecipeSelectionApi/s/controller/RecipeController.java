@@ -30,17 +30,17 @@ public class RecipeController {
         return recipeService.getRecipe();
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("{id}")
     public ResponseEntity getRecipeById(@PathVariable int id) {
         return recipeService.getRecipeById(id);
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("{id}")
     public ResponseEntity updateRecipe(@PathVariable int id, @RequestBody Recipe recipe) {
         return recipeService.updateRecipe(id, recipe);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity deleteRecipe(@PathVariable int id) {
         return recipeService.deleteRecipe(id);
     }
