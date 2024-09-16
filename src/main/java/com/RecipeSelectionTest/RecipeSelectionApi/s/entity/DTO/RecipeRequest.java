@@ -13,7 +13,7 @@ public class RecipeRequest {
     private String title;
     @NotBlank(message = "MakingTime must not be null.")
     @NotNull
-    private String makingTime;
+    private String making_time;
     @NotBlank(message = "Serves must not be null.")
     @NotNull
     private String serves;

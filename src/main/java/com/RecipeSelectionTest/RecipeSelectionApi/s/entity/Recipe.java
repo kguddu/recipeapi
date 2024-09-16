@@ -21,7 +21,7 @@ public class Recipe {
 
     @NotBlank(message = "Making time is required")
     @Column(name = "making_time", nullable = false, length = 100)
-    private String makingTime;
+    private String making_time;
 
     @NotBlank(message = "Serves is required")
     @Column(name = "serves", nullable = false, length = 100)

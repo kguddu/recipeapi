@@ -71,8 +71,8 @@ public class RecipeService {
                     .orElseThrow(() -> new IdNotFoundException(Message.ID_NOT_FOUND.getMessage()));
             if(recipe.getTitle() != null)
                 getRecipe.setTitle(recipe.getTitle());
-            if(recipe.getMakingTime() != null)
-                getRecipe.setMakingTime(recipe.getMakingTime());
+            if(recipe.getMaking_time() != null)
+                getRecipe.setMaking_time(recipe.getMaking_time());
             if(recipe.getCost() != null)
                 getRecipe.setCost(recipe.getCost());
             if(recipe.getServes() != null)
@@ -106,7 +106,7 @@ public class RecipeService {
     private Recipe mapToRecipe(RecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();
         recipe.setTitle(recipeRequest.getTitle());
-        recipe.setMakingTime(recipeRequest.getMakingTime());
+        recipe.setMaking_time(recipeRequest.getMaking_time());
         recipe.setServes(recipeRequest.getServes());
         recipe.setIngredients(recipeRequest.getIngredients());
         recipe.setCost(recipeRequest.getCost());

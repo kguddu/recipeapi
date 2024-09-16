@@ -1,15 +1,12 @@
 package com.RecipeSelectionTest.RecipeSelectionApi.s.controller;
 
 import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.DTO.RecipeRequest;
-import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.DTO.RecipeResponse;
 import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.Recipe;
 import com.RecipeSelectionTest.RecipeSelectionApi.s.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
