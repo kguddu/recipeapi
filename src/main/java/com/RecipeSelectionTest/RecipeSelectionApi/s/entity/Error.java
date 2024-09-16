@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Error {
     private String message;
-    private Set<String> stackTrace;
+    private String required;
 
     public Error(String message) {
         this.message = message;

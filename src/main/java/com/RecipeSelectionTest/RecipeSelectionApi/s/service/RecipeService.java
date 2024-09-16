@@ -1,6 +1,7 @@
 package com.RecipeSelectionTest.RecipeSelectionApi.s.service;
 
 import com.RecipeSelectionTest.RecipeSelectionApi.s.constants.Message;
+import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.DTO.RecipeGetAll;
 import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.DTO.RecipeRequest;
 import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.DTO.RecipeResponse;
 import com.RecipeSelectionTest.RecipeSelectionApi.s.entity.Error;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
@@ -42,15 +44,20 @@ public class RecipeService {
             }
         }
 
-    public ResponseEntity<List<Recipe>> getRecipe(){
-        return ResponseEntity.ok(recipeRepository.findAll());
+    public ResponseEntity getRecipe(){
+        //return ResponseEntity.ok(recipeRepository.findAll());
+        List<Recipe> recipeList = recipeRepository.findAll();
+        recipeList.forEach(System.out::println);
+        RecipeGetAll recipeGetAll = new RecipeGetAll();
+        recipeGetAll.setRecipes(recipeList);
+        return ResponseEntity.ok(recipeGetAll);
     }
 
     public ResponseEntity getRecipeById(Integer id) {
         if (recipeRepository.existsById(id)){
             Recipe recipe = recipeRepository.findById(id).get();
             RecipeResponse recipeResponse = mapToRecipeResponse(recipe);
-            recipeResponse.setMessage(Message.RECIPE_FOUND.getMessageWithId(id));
+            recipeResponse.setMessage(Message.RECIPE_FOUND.getMessage());
             return ResponseEntity.ok(recipeResponse);
         } else {
             ErrorMessage error = new ErrorMessage(Message.ID_NOT_FOUND.getMessage());
@@ -110,7 +117,7 @@ public class RecipeService {
         RecipeResponse recipeResponse = new RecipeResponse();
         List<Recipe> recipesToAdd = new ArrayList<>();
         recipesToAdd.add(recipes);
-        recipeResponse.setRecipes(recipesToAdd);
+        recipeResponse.setRecipe(recipesToAdd);
         return recipeResponse;
     }
 
@@ -120,8 +127,8 @@ public class RecipeService {
             validationErrors.add(error.getField());
         }
         Error errorResponse = new Error();
-        errorResponse.setMessage("Validation failed");
-        errorResponse.setStackTrace(validationErrors);
-        return ResponseEntity.badRequest().body(errorResponse);
+        errorResponse.setMessage(Message.CREATION_FAILED.getMessage());
+        errorResponse.setRequired(validationErrors.stream().collect(Collectors.joining(", ")));
+        return ResponseEntity.ok(errorResponse);
     }
 }
