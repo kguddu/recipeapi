@@ -38,7 +38,7 @@ public class RecipeService {
         } catch (RuntimeException runtimeException) {
             Error error = new Error();
             error.setMessage(Message.CREATION_FAILED.getMessage());
-                return ResponseEntity.badRequest().body(error);
+                return ResponseEntity.ok(error);
             }
         }
 
